@@ -1,5 +1,5 @@
 #Pre-Determined Variables
-vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var"], ["Command.inp"]]
+vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var","Location.var","Locationdir.var"], ["Command.inp","Echo.inp"],["Vardir.lst"],["Booted.bool"]]
 booted = False
 location = 0
 locationdir = "/workspaces/bkernel "
