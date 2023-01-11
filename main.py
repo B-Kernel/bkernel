@@ -2,6 +2,7 @@
 vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var"], ["Command.inp"]]
 booted = False
 location = 0
+locationdir = "/workspaces/bkernel "
 #Imported Extensions
 import random
 import os
@@ -34,7 +35,7 @@ booted = Bootloader()
 #Okay, I'll make a REGISTRY, you make a Directory sounds good
 while booted == True:
   print("Type a command:")
-  command = str(input("/workspaces/bkernel "))
+  command = str(input(locationdir))
   if "registry" in command:
     if command == "registry fun":
       Registry("fun")
@@ -58,3 +59,26 @@ while booted == True:
   elif "whereami" in command:
     if location == 0:
       print("/workspaces/bkernel")
+    elif location == 1:
+      print("/workspaces/bkernel/about")
+  elif "cd" in command:
+    #0 = Root
+    #1 = About
+    if command == "cd about":
+      location = 1
+      locationdir = "/workspaces/bkernel/about "
+      print("Done!")
+    elif command == "cd 0":
+      if location == 1:
+        location = 0
+        locationdir = "/workspaces/bkernel "
+      else:
+        print("Error 0x004 - Directory is not Accessible")
+  elif "rd" in command:
+    # with open(r"/workspaces/bkernel/About/README.md", "r") as FILE_TEMP:
+    #   print(FILE_TEMP.read())
+    print(os.listdir(os.path.dirname(os.path.realpath(__file__))))
+    # if location == 1:
+    #   os.listdir('/workspaces/bkernel/about')
+    # else:
+    #   os.listdir('/workspaces/bkernel')
