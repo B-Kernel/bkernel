@@ -1,5 +1,5 @@
 #Pre-Determined Variables
-vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var"], ["Command.inp"]]
+vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var","Location.var","Locationdir.var"], ["Command.inp","Echo.inp"],["Vardir.lst"],["Booted.bool"]]
 booted = False
 location = 0
 locationdir = "/workspaces/bkernel "
@@ -75,10 +75,7 @@ while booted == True:
       else:
         print("Error 0x004 - Directory is not Accessible")
   elif "rd" in command:
-    # with open(r"/workspaces/bkernel/About/README.md", "r") as FILE_TEMP:
-    #   print(FILE_TEMP.read())
-    print(os.listdir(os.path.dirname(os.path.realpath(__file__))))
-    # if location == 1:
-    #   os.listdir('/workspaces/bkernel/about')
-    # else:
-    #   os.listdir('/workspaces/bkernel')
+    if location == 0:
+      print(os.listdir(os.path.dirname(os.path.realpath(__file__))))
+    elif location == 1:
+      print(os.listdir(os.path.dirname(os.path.realpath(__file__)) + r"/About"))
