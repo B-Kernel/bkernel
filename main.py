@@ -1,5 +1,5 @@
 #Pre-Determined Variables
-vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var","Location.var","Locationdir.var"], ["Command.inp","Echo.inp"],["Vardir.lst"],["Booted.bool"]]
+vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var","Location.var","Locationdir.var","cman.var"], ["Command.inp","Echo.inp"],["Vardir.lst"],["Booted.bool"]]
 booted = False
 location = 0
 locationdir = "/workspaces/bkernel "
@@ -22,12 +22,18 @@ def Registry(x = 0):
     print(vardir[0]) #.fun Commands
     print(vardir[1]) #.var Commands
     print(vardir[2]) #.inp Commands
+    print(vardir[3]) #.lst Commands
+    print(vardir[4]) #.bool Commands
   elif x == "fun":
     print(vardir[0]) #only prints .fun Commands
   elif x == "var":
     print(vardir[1]) #only prints .var Commands
   elif x == "inp":
     print(vardir[2]) #only prints .inp Commands
+  elif x == "lst":
+    print(vardir[3]) #only prints .lst Commands
+  elif x == "bool":
+    print(vardir[4]) # only prints .bool Commands
 #Post-Determined Variables
 booted = Bootloader()
 #Default Directory: /workspaces/bkernel
@@ -43,6 +49,10 @@ while booted == True:
       Registry("var")
     elif command == "registry inp":
       Registry("inp")
+    elif command == "registry lst":
+      Registry("lst")
+    elif command == "registry bool":
+      Registry("bool")
     elif command == "registry":
       Registry()
     else:
@@ -54,9 +64,14 @@ while booted == True:
     elif command == "execute Registry.fun":
       Registry()
       print("Completed")
+    elif command == "execute Booted.bool":
+      print(str(booted) + "\n" + "Done!")
     else:
       print("Error 0x003 -  File Cannot be Executed")
-  elif "whereami" in command:
+  elif "echo" in command: #echo
+      echo = input()
+      print("\"" + str(echo) + "\"")
+  elif "whereami" in command: #wherami
     if location == 0:
       print("/workspaces/bkernel")
     elif location == 1:
@@ -65,17 +80,29 @@ while booted == True:
     #0 = Root
     #1 = About
     if command == "cd about":
-      location = 1
-      locationdir = "/workspaces/bkernel/about "
-      print("Done!")
+      if location == 0:
+        location = 1
+        locationdir = "/workspaces/bkernel/about "
+        print("Done!")
+      else:
+        print("Error 0x004 - Directory is not Accessible")
     elif command == "cd 0":
       if location == 1:
         location = 0
         locationdir = "/workspaces/bkernel "
       else:
         print("Error 0x004 - Directory is not Accessible")
-  elif "rd" in command:
+  elif command == "rd":
     if location == 0:
       print(os.listdir(os.path.dirname(os.path.realpath(__file__))))
     elif location == 1:
       print(os.listdir(os.path.dirname(os.path.realpath(__file__)) + r"/About"))
+  elif "rdi" in command:
+    echo = input("Insert Path: ")
+    cman = open(echo,"r")
+    print(cman.read())
+    cman.close
+  elif "exit" in command:
+    print("Shutting Down...")
+    time.sleep(random.randint(0, 5))
+    booted = False
