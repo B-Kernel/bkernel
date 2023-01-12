@@ -98,15 +98,10 @@ while booted == True:
     elif location == 1:
       print(os.listdir(os.path.dirname(os.path.realpath(__file__)) + r"/About"))
   elif "rdi" in command:
-    echo = input()
-    if echo == "README.md" or echo == "README":
-      if location == 1:
-        cman = open(r"/workspaces/bkernel/About/README.md","r")
-        print(cman.read())
-        cman.close
-      else:
-        print("File not available in Current Directory.")
-        print("Current Directory: " + locationdir)
+    echo = input("Insert Path: ")
+    cman = open(echo,"r")
+    print(cman.read())
+    cman.close
   elif "exit" in command:
     print("Shutting Down...")
     time.sleep(random.randint(0, 5))
