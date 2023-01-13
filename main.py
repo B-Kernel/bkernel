@@ -3,6 +3,24 @@ vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var","Location.var","Locat
 booted = False
 location = 0
 locationdir = "/workspaces/bkernel "
+
+# The error codes are in this dictionary for easy re-use
+error_codes = {
+  "0x001": "The 'bootloader' instance is already running.",
+  "0x002": "The item you were searching for was not found.",
+  "0x003": "The file cannot be executed.",
+  "0x004": "The directory is not accessible."
+}
+
+def print_error(error_code, print_error=True):
+  error_message = f"Error code {error_code}: {error_codes[error_code]}"
+
+  if (print_error == True):
+    print(error_message)
+    return None
+  else:
+    return error_message
+
 #Imported Extensions
 import random
 import os
@@ -15,7 +33,7 @@ def Bootloader():
     print("B Kernel")
     return True
   else:
-    print("Error 0x001 - Bootloader Instance Already Running")
+    print_error("0x001");
 #Registry
 def Registry(x = 0):
   if x == 0: #Prints all Commands
@@ -56,7 +74,7 @@ while booted == True:
     elif command == "registry":
       Registry()
     else:
-      print("Error 0x002 - Not Found")
+      print_error("0x002");
   elif "execute" in command:
     if command == "execute Bootloader.fun":
       Bootloader()
@@ -67,7 +85,7 @@ while booted == True:
     elif command == "execute Booted.bool":
       print(str(booted) + "\n" + "Done!")
     else:
-      print("Error 0x003 -  File Cannot be Executed")
+      print_error("0x003");
   elif "echo" in command: #echo
       echo = input()
       print("\"" + str(echo) + "\"")
@@ -85,13 +103,13 @@ while booted == True:
         locationdir = "/workspaces/bkernel/about "
         print("Done!")
       else:
-        print("Error 0x004 - Directory is not Accessible")
+        print_error("0x004");
     elif command == "cd 0":
       if location == 1:
         location = 0
         locationdir = "/workspaces/bkernel "
       else:
-        print("Error 0x004 - Directory is not Accessible")
+        print_error("0x004");
   elif command == "rd":
     if location == 0:
       print(os.listdir(os.path.dirname(os.path.realpath(__file__))))
