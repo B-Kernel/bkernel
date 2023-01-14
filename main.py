@@ -1,3 +1,7 @@
+import os
+
+os.system('color')
+
 # Pre-determined variables
 vardir = [
   ["Bootloader.fun","Registry.fun"],
