@@ -141,6 +141,8 @@ while booted == True:
     cman = open(echo,"r")
     print(cman.read())
     cman.close
+  elif "cls" in command:
+    os.system('cls')
   elif "exit" in command:
     print("Shutting Down...")
     time.sleep(random.randint(0, 5))
