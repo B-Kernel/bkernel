@@ -14,8 +14,7 @@ booted = False
 location = 0
 locationdir = "/workspaces/bkernel "
 
-# Colors
-# For more help; see https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
+# Colors | For more help; see https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -64,9 +63,10 @@ import time
 #Bootloader
 def Bootloader():
   if booted == False:
-    print(f"{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
-    time.sleep(random.randint(0, 3))
-    print(f"{bcolors.WARNING}Welcome to {bcolors.UNDERLINE}B Kernel{bcolors.ENDC}")
+    print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
+    time.sleep(random.randint(2, 5))
+    os.system('cls')
+    print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
     return True
   else:
     print_error("0x001");
