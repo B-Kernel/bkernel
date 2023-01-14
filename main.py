@@ -60,9 +60,9 @@ import time
 #Bootloader
 def Bootloader():
   if booted == False:
-    print("Booting B Kernel...")
-    time.sleep(random.randint(0, 5))
-    print("B Kernel")
+    print(f"{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
+    time.sleep(random.randint(0, 3))
+    print(f"{bcolors.WARNING}Welcome to {bcolors.UNDERLINE}B Kernel{bcolors.ENDC}")
     return True
   else:
     print_error("0x001");
@@ -90,7 +90,6 @@ booted = Bootloader()
 #I'll do this when I finish with my work D:
 #Okay, I'll make a REGISTRY, you make a Directory sounds good
 while booted == True:
-  print("Type a command:")
   command = str(input(locationdir))
   if "registry" in command:
     if command == "registry fun":
@@ -123,9 +122,9 @@ while booted == True:
       print("\"" + str(echo) + "\"")
   elif "whereami" in command: #wherami
     if location == 0:
-      print("/workspaces/bkernel")
+      print("/workspaces/bkernel ")
     elif location == 1:
-      print("/workspaces/bkernel/about")
+      print("/workspaces/bkernel/about ")
   elif "cd" in command:
     #0 = Root
     #1 = About
