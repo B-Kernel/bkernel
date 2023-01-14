@@ -10,18 +10,32 @@ booted = False
 location = 0
 locationdir = "/workspaces/bkernel "
 
+# Colors
+# For more help; see https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 # The error codes are in this dictionary for easy re-use; add new ones whenever you wish :)
 error_codes = {
   "0x001": "The 'bootloader' instance is already running.",
   "0x002": "The item you were searching for was not found.",
   "0x003": "The file cannot be executed.",
-  "0x004": "The directory is not accessible."
+  "0x004": "The directory is not accessible.",
+  "0x005": "That command doesn't exist. Type 'help' for a list of available commands."
 }
 
 # Print error function for easy re-use; make sure to use the correct error code
 def print_error(error_code, print_error=True):
   try:
-    error_message = f"Error code {error_code}: {error_codes[error_code]}"
+    error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
   except:
     raise Exception(f"The error code, {error_code}, is invalid.")
 
@@ -147,3 +161,5 @@ while booted == True:
     print("Shutting Down...")
     time.sleep(random.randint(0, 5))
     booted = False
+  else:
+    print_error("0x005")
