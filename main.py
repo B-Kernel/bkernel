@@ -1,10 +1,16 @@
-#Pre-Determined Variables
-vardir = [["Bootloader.fun","Registry.fun"], ["Booted.var","Location.var","Locationdir.var","cman.var"], ["Command.inp","Echo.inp"],["Vardir.lst"],["Booted.bool"]]
+# Pre-determined variables
+vardir = [
+  ["Bootloader.fun","Registry.fun"],
+  ["Booted.var","Location.var","Locationdir.var","cman.var"],
+  ["Command.inp","Echo.inp"],
+  ["Vardir.lst"],
+  ["Booted.bool"]
+]
 booted = False
 location = 0
 locationdir = "/workspaces/bkernel "
 
-# The error codes are in this dictionary for easy re-use
+# The error codes are in this dictionary for easy re-use; add new ones whenever you wish :)
 error_codes = {
   "0x001": "The 'bootloader' instance is already running.",
   "0x002": "The item you were searching for was not found.",
@@ -12,14 +18,26 @@ error_codes = {
   "0x004": "The directory is not accessible."
 }
 
+# Print error function for easy re-use; make sure to use the correct error code
 def print_error(error_code, print_error=True):
-  error_message = f"Error code {error_code}: {error_codes[error_code]}"
+  try:
+    error_message = f"Error code {error_code}: {error_codes[error_code]}"
+  except:
+    raise Exception(f"The error code, {error_code}, is invalid.")
 
   if (print_error == True):
     print(error_message)
     return None
   else:
     return error_message
+
+def help_command(command=None):
+  if (command == None or command == ""):
+    return "\nTo get help with a specific command, type help <command>\n"
+  elif (command == "help"):
+    return "\nbruh\n"
+  elif (command == "rd"):
+    return "\nReads a directory you specify.\n\n\tExample: rd about\n\nSyntax:\n\trd <directory_name>\n\nReturns:\n\tThe directory contents of the directory name you specified. In case you specify an invalid/non-existent directory, you will get an error code of 0x004.\n"
 
 #Imported Extensions
 import random
@@ -110,6 +128,9 @@ while booted == True:
         locationdir = "/workspaces/bkernel "
       else:
         print_error("0x004");
+  elif command == "help":
+    command_help = input("What command do you need help with? ")
+    print(help_command(command_help))
   elif command == "rd":
     if location == 0:
       print(os.listdir(os.path.dirname(os.path.realpath(__file__))))
