@@ -109,7 +109,7 @@ while booted == True:
     elif command == "registry":
       Registry()
     else:
-      print_error("0x002");
+      print_error("0x002")
   elif "execute" in command:
     if command == "execute Bootloader.fun":
       Bootloader()
@@ -138,13 +138,13 @@ while booted == True:
         locationdir = "/workspaces/bkernel/about "
         print("Done!")
       else:
-        print_error("0x004");
+        print_error("0x004")
     elif command == "cd 0":
       if location == 1:
         location = 0
         locationdir = "/workspaces/bkernel "
       else:
-        print_error("0x004");
+        print_error("0x004")
   elif command == "help":
     command_help = input("What command do you need help with? ")
     print(help_command(command_help))
@@ -153,14 +153,27 @@ while booted == True:
       print(os.listdir(os.path.dirname(os.path.realpath(__file__))))
     elif location == 1:
       print(os.listdir(os.path.dirname(os.path.realpath(__file__)) + r"/About"))
-  elif "rdi" in command:
+  elif "rf" in command:
     echo = input("Insert Path: ")
     cman = open(echo,"r")
     print(cman.read())
     cman.close
+  elif "wf" in command:
+    echo = input("Insert Name: ")
+    with open("docs/" + echo, 'w') as f:
+      os.system('cls')
+      print("Editing File with Name (" + echo + ").")
+      f.write(input(""))
+  elif "df" in command:
+    echo = input("Insert Path: ")
+    os.remove(echo)
+  elif "ded" in command:
+    echo = input("Insert Directory Path: ")
+    os.rmdir(echo)
   elif "cls" in command:
     os.system('cls')
   elif "exit" in command:
+    os.system('cls')
     print("Shutting Down...")
     time.sleep(random.randint(0, 5))
     booted = False
