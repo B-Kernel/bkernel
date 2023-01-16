@@ -164,6 +164,12 @@ while booted == True:
       os.system('cls')
       print("Editing File with Name (" + echo + ").")
       f.write(input(""))
+  elif "df" in command:
+    echo = input("Insert Path: ")
+    os.remove(echo)
+  elif "ded" in command:
+    echo = input("Insert Directory Path: ")
+    os.rmdir(echo)
   elif "cls" in command:
     os.system('cls')
   elif "exit" in command:
