@@ -1,4 +1,6 @@
 import os
+import sys
+import shutil
 
 os.system('color')
 
@@ -69,7 +71,7 @@ def Bootloader():
     print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
     return True
   else:
-    print_error("0x001");
+    print_error("0x001")
 #Registry
 def Registry(x = 0):
   if x == 0: #Prints all Commands
@@ -170,6 +172,12 @@ while booted == True:
   elif "ded" in command:
     echo = input("Insert Directory Path: ")
     os.rmdir(echo)
+  elif "dd" in command:
+    echo = input("Insert Directory Path: ")
+    try:
+      shutil.rmtree(echo)
+    except OSError as Error:
+      print_error("0x004")
   elif "cls" in command:
     os.system('cls')
   elif "exit" in command:
