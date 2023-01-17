@@ -6,7 +6,7 @@ os.system('color')
 
 # Pre-determined variables
 vardir = [
-  ["Bootloader.fun","Registry.fun"],
+  ["Bootloader.fn","Registry.fn"],
   ["Booted.var","Location.var","Locationdir.var","cman.var"],
   ["Command.inp","Echo.inp"],
   ["Vardir.lst"],
@@ -75,13 +75,13 @@ def Bootloader():
 #Registry
 def Registry(x = 0):
   if x == 0: #Prints all Commands
-    print(vardir[0]) #.fun Commands
+    print(vardir[0]) #.fn Commands
     print(vardir[1]) #.var Commands
     print(vardir[2]) #.inp Commands
     print(vardir[3]) #.lst Commands
     print(vardir[4]) #.bool Commands
-  elif x == "fun":
-    print(vardir[0]) #only prints .fun Commands
+  elif x == "fn":
+    print(vardir[0]) #only prints .fn Commands
   elif x == "var":
     print(vardir[1]) #only prints .var Commands
   elif x == "inp":
@@ -98,8 +98,8 @@ booted = Bootloader()
 while booted == True:
   command = str(input(locationdir))
   if "registry" in command:
-    if command == "registry fun":
-      Registry("fun")
+    if command == "registry fn":
+      Registry("fn")
     elif command == "registry var":
       Registry("var")
     elif command == "registry inp":
@@ -113,10 +113,10 @@ while booted == True:
     else:
       print_error("0x002")
   elif "execute" in command:
-    if command == "execute Bootloader.fun":
+    if command == "execute Bootloader.fn":
       Bootloader()
       print("Completed.")
-    elif command == "execute Registry.fun":
+    elif command == "execute Registry.fn":
       Registry()
       print("Completed")
     elif command == "execute Booted.bool":
