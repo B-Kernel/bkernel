@@ -52,11 +52,17 @@ def print_error(error_code, print_error=True):
 
 def help_command(command=None):
   if (command == None or command == ""):
+    os.system('cls')
     return "\nTo get help with a specific command, type help <command>\n"
   elif (command == "help"):
+    os.system('cls')
     return "\nbruh\n"
   elif (command == "rd"):
-    return "\nReads a directory you specify.\n\n\tExample: rd about\n\nSyntax:\n\trd <directory_name>\n\nReturns:\n\tThe directory contents of the directory name you specified. In case you specify an invalid/non-existent directory, you will get an error code of 0x004.\n"
+    os.system('cls')
+    return "\nReads a directory you specify.\n\n\tExample: rd About\n\nSyntax:\n\trd <directory_name>\n\nReturns:\n\tThe directory contents of the directory name you specified. In case you specify an invalid/non-existent directory, you will get an error code of 0x004.\n"
+  elif (command == "rf"):
+    os.system('cls')
+    return "\nReads a directory you specify.\n\n\tExample: rf /workspaces/bkernel/docs/Test\n\nSyntax:\n\trf <location of file (path)>\n\nReturns:\n\tThe contents of the filename you specified. In case you specify an invalid/non-existent file, you will get an error code of 0x002.\n"
 
 #Imported Extensions
 import random
