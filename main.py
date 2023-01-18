@@ -62,8 +62,28 @@ def help_command(command=None):
     return "\nReads a directory you specify.\n\n\tExample: rd About\n\nSyntax:\n\trd <directory_name>\n\nReturns:\n\tThe directory contents of the directory name you specified. In case you specify an invalid/non-existent directory, you will get an error code of 0x004.\n"
   elif (command == "rf"):
     os.system('cls')
-    return "\nReads a directory you specify.\n\n\tExample: rf /workspaces/bkernel/docs/Test\n\nSyntax:\n\trf <location of file (path)>\n\nReturns:\n\tThe contents of the filename you specified. In case you specify an invalid/non-existent file, you will get an error code of 0x002.\n"
-
+    return "\nReads a file you specify.\n\n\tExample: rf /workspaces/bkernel/docs/Test\n\nSyntax:\n\trf <location of file (path)>\n\nReturns:\n\tThe contents of the filename you specified. In case you specify an invalid/non-existent file, you will get an error code of 0x002.\n"
+  elif (command == "wf"):
+    os.system('cls')
+    return "\nCreates a file with a given name + data\n"
+  elif (command == "wd"):
+    os.system('cls')
+    return "\nCreates a directory with a given name."
+  elif (command == "df"):
+    os.system('cls')
+    return "\nDeletes a file with a given filepath."
+  elif (command == "ded"):
+    os.system('cls')
+    return "\nDeletes an Empty directory."
+  elif (command == "dd"):
+    os.system('cls')
+    return "\nDeletes a directory and all of its contents."
+  elif (command == "registry"):
+    os.system('cls')
+    return "\nDisplays all active variables."
+  elif (command == "cls"):
+    os.system('cls')
+    return "\nClears your Screen\n"
 #Imported Extensions
 import random
 import os
@@ -184,6 +204,9 @@ while booted == True:
       shutil.rmtree(echo)
     except OSError as Error:
       print_error("0x004")
+  elif "wd" in command:
+    echo = input("Insert Directory Name: ")
+    os.mkdir(echo)    
   elif "cls" in command:
     os.system('cls')
   elif "exit" in command:
