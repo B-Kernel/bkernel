@@ -194,7 +194,47 @@ while booted == True:
       f.write(input(""))
   elif "df" in command:
     echo = input("Insert Path: ")
-    os.remove(echo)
+    if ".py" in echo:
+      if "main.py" in echo:
+        print("Access Denied.")
+      else:
+        eco = input("This file might contain important data files. Are you sure you want to continue? [Y/N] ")
+        if eco == "Y":
+          os.remove(echo)
+        else:
+          pass
+    elif ".exe" in echo:
+      eco = input("This file might contain important data files. Are you sure you want to continue? [Y/N] ")
+      if eco == "Y":
+        os.remove(echo)
+      else:
+        pass
+    elif ".iso" in echo:
+      eco = input("This file might contain important data files. Are you sure you want to continue? [Y/N] ")
+      if eco == "Y":
+        os.remove(echo)
+      else:
+        pass
+    elif ".bat" in echo:
+      eco = input("This file might contain important data files. Are you sure you want to continue? [Y/N] ")
+      if eco == "Y":
+        os.remove(echo)
+      else:
+        pass
+    elif ".dll" in echo:
+      eco = input("This file might contain important data files. Are you sure you want to continue? [Y/N] ")
+      if eco == "Y":
+        os.remove(echo)
+      else:
+        pass
+    elif ".img" in echo:
+      eco = input("This file might contain important data files. Are you sure you want to continue? [Y/N] ")
+      if eco == "Y":
+        os.remove(echo)
+      else:
+        pass
+    else:
+      os.remove(echo)
   elif "ded" in command:
     echo = input("Insert Directory Path: ")
     os.rmdir(echo)
