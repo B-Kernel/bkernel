@@ -51,39 +51,35 @@ def print_error(error_code, print_error=True):
     return error_message
 
 def help_command(command=None):
-  if (command == None or command == ""):
+  if command == None:
+    print("Try typing in a command, such as help <command>")
+  else:
     os.system('cls')
-    return "\nTo get help with a specific command, type help <command>\n"
-  elif (command == "help"):
-    os.system('cls')
-    return "\nbruh\n"
-  elif (command == "rd"):
-    os.system('cls')
-    return "\nReads a directory you specify.\n\n\tExample: rd About\n\nSyntax:\n\trd <directory_name>\n\nReturns:\n\tThe directory contents of the directory name you specified. In case you specify an invalid/non-existent directory, you will get an error code of 0x004.\n"
-  elif (command == "rf"):
-    os.system('cls')
-    return "\nReads a file you specify.\n\n\tExample: rf /workspaces/bkernel/docs/Test\n\nSyntax:\n\trf <location of file (path)>\n\nReturns:\n\tThe contents of the filename you specified. In case you specify an invalid/non-existent file, you will get an error code of 0x002.\n"
-  elif (command == "wf"):
-    os.system('cls')
-    return "\nCreates a file with a given name + data\n"
-  elif (command == "wd"):
-    os.system('cls')
-    return "\nCreates a directory with a given name."
-  elif (command == "df"):
-    os.system('cls')
-    return "\nDeletes a file with a given filepath."
-  elif (command == "ded"):
-    os.system('cls')
-    return "\nDeletes an Empty directory."
-  elif (command == "dd"):
-    os.system('cls')
-    return "\nDeletes a directory and all of its contents."
-  elif (command == "registry"):
-    os.system('cls')
-    return "\nDisplays all active variables."
-  elif (command == "cls"):
-    os.system('cls')
-    return "\nClears your Screen\n"
+    if command == "cls":
+      print("cls - Clears your Screen")
+    elif command == "wf":
+      print("wf - Creates File")
+    elif command == "rf":
+      print("rf -Reads File")
+    elif command == "df":
+      print("df - Deletes File")
+    elif command == "wd":
+      print("wd - Creates Directory")
+    elif command == "rd":
+      print("rd - Read Directory")
+    elif command == "ded":
+      print("ded - Delete Empty Directory")
+    elif command == "dd":
+      print("dd - Delete Directory + Contents")
+    elif command == "registry":
+      print("View all active variables.")
+    elif command == "execute":
+      print("Executes a function.")
+    elif command == "help":
+      print("bruh")
+    else:
+      print("No Data found for this command.")
+
 #Imported Extensions
 import random
 import os
@@ -116,11 +112,12 @@ def Registry(x = 0):
     print(vardir[3]) #only prints .lst Commands
   elif x == "bool":
     print(vardir[4]) # only prints .bool Commands
+
 #Post-Determined Variables
+
 booted = Bootloader()
+
 #Default Directory: /workspaces/bkernel
-#I'll do this when I finish with my work D:
-#Okay, I'll make a REGISTRY, you make a Directory sounds good
 while booted == True:
   command = str(input(locationdir))
   if "registry" in command:
