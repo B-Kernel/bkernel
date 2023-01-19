@@ -1,5 +1,4 @@
 import os
-import sys
 import shutil
 
 os.system('color')
@@ -124,7 +123,7 @@ booted = Bootloader()
 #I'll do this when I finish with my work D:
 #Okay, I'll make a REGISTRY, you make a Directory sounds good
 while booted == True:
-  command = str(input(comlistdir))
+  command = str(input(os.getcwd() + " "))
   if "registry" in command:
     if command == "registry fn":
       Registry("fn")
@@ -159,27 +158,11 @@ while booted == True:
   elif "cd" in command:
     locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
     echo = input("Insert New Directory (Located in " + locationdir + ") ")
-    if echo == "home":
-      locationdir = "/workspaces/bkernel"
-      comlistdir = locationdir + " "
-    elif echo == "..":
-      if locationdir == "/workspaces/bkernel/About" or locationdir == "/workspaces/bkernel/docs":
-        locationdir = "/workspaces/bkernel"
-        comlistdir = locationdir + " "
-      elif locationdir == "/workspaces/bkernel":
-        locationdir = "/workspaces"
-        comlistdir = locationdir + " "
-      elif locationdir == "/workspaces":
-        locationdir = "/"
-        comlistdir = locationdir + " "
-      elif locationdir == "/":
-        locationdir = "/workspaces/bkernel"
-        comlistdir = locationdir + " "
-      else:
-        print_error("0x004")
-    if echo in locationstr:
-      locationdir = locationdir + "/" + echo
-      comlistdir = locationdir + " "
+    
+    try:
+      os.chdir(echo)
+    except WindowsError and OSError:
+      print("An error occurred.")
   elif command == "help":
     command_help = input("What command do you need help with? ")
     print(help_command(command_help))
