@@ -7,14 +7,16 @@ os.system('color')
 # Pre-determined variables
 vardir = [
   ["Bootloader.fn","Registry.fn"],
-  ["Booted.var","Location.var","Locationdir.var","cman.var"],
+  ["Booted.var","Location.var","Locationdir.var", "Locationstr.var", "cman.var", "comlistdir.var"],
   ["Command.inp","Echo.inp"],
   ["Vardir.lst"],
   ["Booted.bool"]
 ]
 booted = False
 location = 0
-locationdir = "/workspaces/bkernel "
+locationdir = os.path.dirname(os.path.realpath(__file__))
+comlistdir = locationdir + " "
+locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 
 # Colors | For more help; see https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 class bcolors:
@@ -122,7 +124,7 @@ booted = Bootloader()
 #I'll do this when I finish with my work D:
 #Okay, I'll make a REGISTRY, you make a Directory sounds good
 while booted == True:
-  command = str(input(locationdir))
+  command = str(input(comlistdir))
   if "registry" in command:
     if command == "registry fn":
       Registry("fn")
@@ -148,39 +150,41 @@ while booted == True:
     elif command == "execute Booted.bool":
       print(str(booted) + "\n" + "Done!")
     else:
-      print_error("0x003");
+      print_error("0x003")
   elif "echo" in command: #echo
       echo = input()
       print("\"" + str(echo) + "\"")
   elif "whereami" in command: #wherami
-    if location == 0:
-      print("/workspaces/bkernel ")
-    elif location == 1:
-      print("/workspaces/bkernel/about ")
+    print(locationdir)
   elif "cd" in command:
-    #0 = Root
-    #1 = About
-    if command == "cd about":
-      if location == 0:
-        location = 1
-        locationdir = "/workspaces/bkernel/about "
-        print("Done!")
+    locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+    echo = input("Insert New Directory (Located in " + locationdir + ") ")
+    if echo == "home":
+      locationdir = "/workspaces/bkernel"
+      comlistdir = locationdir + " "
+    elif echo == "..":
+      if locationdir == "/workspaces/bkernel/About" or locationdir == "/workspaces/bkernel/docs":
+        locationdir = "/workspaces/bkernel"
+        comlistdir = locationdir + " "
+      elif locationdir == "/workspaces/bkernel":
+        locationdir = "/workspaces"
+        comlistdir = locationdir + " "
+      elif locationdir == "/workspaces":
+        locationdir = "/"
+        comlistdir = locationdir + " "
+      elif locationdir == "/":
+        locationdir = "/workspaces/bkernel"
+        comlistdir = locationdir + " "
       else:
         print_error("0x004")
-    elif command == "cd 0":
-      if location == 1:
-        location = 0
-        locationdir = "/workspaces/bkernel "
-      else:
-        print_error("0x004")
+    if echo in locationstr:
+      locationdir = locationdir + "/" + echo
+      comlistdir = locationdir + " "
   elif command == "help":
     command_help = input("What command do you need help with? ")
     print(help_command(command_help))
   elif command == "rd":
-    if location == 0:
-      print(os.listdir(os.path.dirname(os.path.realpath(__file__))))
-    elif location == 1:
-      print(os.listdir(os.path.dirname(os.path.realpath(__file__)) + r"/About"))
+    print(os.listdir(locationdir))
   elif "rf" in command:
     echo = input("Insert Path: ")
     cman = open(echo,"r")
