@@ -1,5 +1,6 @@
 import os
 import shutil
+import subprocess
 
 os.system('color')
 
@@ -175,6 +176,9 @@ while booted == True:
     cman = open(echo,"r")
     print(cman.read())
     cman.close
+  elif "rc" in command:
+    echo = input("Insert Path: ")
+    cmancode = subprocess.Popen(["python", echo]) #Runs Python Code!
   elif "wf" in command:
     echo = input("Insert Name: ")
     with open("docs/" + echo, 'w') as f:
