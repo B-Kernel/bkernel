@@ -191,8 +191,6 @@ while booted == True:
         cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
       except OSError:
         print("An Error Occured while reading this code.")
-    time.sleep(random.randint(2, 5))
-    comlistdir = locationdir + " "
   elif "wf" in command:
     echo = input("Insert Name: ")
     with open("docs/" + echo, 'w') as f:
