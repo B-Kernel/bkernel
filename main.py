@@ -1,5 +1,6 @@
 import os
 import shutil
+import subprocess
 
 os.system('color')
 
@@ -175,6 +176,23 @@ while booted == True:
     cman = open(echo,"r")
     print(cman.read())
     cman.close
+  elif "rc" in command:
+    comlistdir = ""
+    echo = input("Insert Path: ")
+    os.system('cls')
+    time.sleep(random.randint(2, 5))
+    if ".py" in echo:
+      try:
+        cmancode = subprocess.Popen(["python", echo]) #Runs Python Code!
+      except OSError:
+        print("An Error Occured while reading this code.")
+    elif ".js" in echo:
+      try:
+        cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
+      except OSError:
+        print("An Error Occured while reading this code.")
+    time.sleep(random.randint(2, 5))
+    comlistdir = locationdir + " "
   elif "wf" in command:
     echo = input("Insert Name: ")
     with open("docs/" + echo, 'w') as f:
