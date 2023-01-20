@@ -177,8 +177,20 @@ while booted == True:
     print(cman.read())
     cman.close
   elif "rc" in command:
+    comlistdir = ""
     echo = input("Insert Path: ")
-    cmancode = subprocess.Popen(["python", echo]) #Runs Python Code!
+    os.system('cls')
+    time.sleep(random.randint(2, 5))
+    if ".py" in echo:
+      try:
+        cmancode = subprocess.Popen(["python", echo]) #Runs Python Code!
+      except OSError:
+        print("An Error Occured while reading this code.")
+    elif ".js" in echo:
+      try:
+        cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
+      except OSError:
+        print("An Error Occured while reading this code.")
   elif "wf" in command:
     echo = input("Insert Name: ")
     with open("docs/" + echo, 'w') as f:
