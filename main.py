@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+from sys import platform
 
 os.system('color')
 
@@ -188,9 +189,31 @@ while booted == True:
         print("An Error Occured while reading this code.")
     elif ".js" in echo:
       try:
-        cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
-      except OSError:
-        print("An Error Occured while reading this code.")
+        # Made by Arnav Thorat
+        # After a lot of hard work,
+        # we finally got this working :)
+        def line_prepender(filename, line):
+          with open(filename, 'r+') as f:
+            content = f.read()
+            f.seek(0, 0)
+            f.write(line.rstrip('\r\n') + '\n' + content)
+
+        def is_exec(filename):
+          with open(filename) as f:
+            if '#!/usr/bin/env node' in f.read():
+              return True
+
+        if not is_exec(echo):
+          line_prepender(echo, "#!/usr/bin/env node")
+
+        if platform == "linux" or platform == "linux2":
+          os.system(f"chmod +x {echo}")
+
+        p = subprocess.Popen(["C:\\Program Files\\nodejs\\node.exe", echo])
+
+        # cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
+      except OSError as err:
+        print(err)
   elif "wf" in command:
     echo = input("Insert Name: ")
     with open("docs/" + echo, 'w') as f:
