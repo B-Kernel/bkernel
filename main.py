@@ -13,9 +13,6 @@ vardir = [
 ]
 booted = False
 location = 0
-locationdir = os.path.dirname(os.path.realpath(__file__))
-comlistdir = locationdir + " "
-locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 
 # Colors | For more help; see https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 class bcolors:
@@ -123,7 +120,12 @@ booted = Bootloader()
 #I'll do this when I finish with my work D:
 #Okay, I'll make a REGISTRY, you make a Directory sounds good
 while booted == True:
+  locationdir = os.getcwd();
+  comlistdir = locationdir + " "
+  locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+
   command = str(input(os.getcwd() + " "))
+
   if "registry" in command:
     if command == "registry fn":
       Registry("fn")
@@ -161,7 +163,7 @@ while booted == True:
     
     try:
       os.chdir(echo)
-    except WindowsError and OSError:
+    except OSError:
       print("An error occurred.")
   elif command == "help":
     command_help = input("What command do you need help with? ")
