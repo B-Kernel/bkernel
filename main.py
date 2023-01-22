@@ -84,6 +84,12 @@ def help_command(command=None):
   elif (command == "cls"):
     os.system('cls')
     return "\nClears your Screen\n"
+  elif (command == "cf"):
+    os.system('cls')
+    return "\nCopies Files\n"
+  elif (command == "rc"):
+    os.system('cls')
+    return "\nRuns Code\nCURRENTLY SUPPORTED:\n1. Python\n2. JavaScript"
 #Imported Extensions
 import random
 import os
