@@ -84,6 +84,12 @@ def help_command(command=None):
   elif (command == "cls"):
     os.system('cls')
     return "\nClears your Screen\n"
+  elif (command == "cf"):
+    os.system('cls')
+    return "\nCopies Files\n"
+  elif (command == "rc"):
+    os.system('cls')
+    return "\nRuns Code\nCURRENTLY SUPPORTED:\n1. Python\n2. JavaScript"
 #Imported Extensions
 import random
 import os
@@ -197,20 +203,15 @@ while booted == True:
             content = f.read()
             f.seek(0, 0)
             f.write(line.rstrip('\r\n') + '\n' + content)
-
         def is_exec(filename):
           with open(filename) as f:
             if '#!/usr/bin/env node' in f.read():
               return True
-
         if not is_exec(echo):
           line_prepender(echo, "#!/usr/bin/env node")
-
         if platform == "linux" or platform == "linux2":
           os.system(f"chmod +x {echo}")
-
         p = subprocess.Popen(["C:\\Program Files\\nodejs\\node.exe", echo])
-
         # cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
       except OSError as err:
         print(err)
@@ -220,6 +221,13 @@ while booted == True:
       os.system('cls')
       print("Editing File with Name (" + echo + ").")
       f.write(input(""))
+  elif "cf" in command:
+    try:
+      src = input("Insert path (of old file): ")
+      dst = input("Insert path of new file: ")
+      shutil.copyfile(src, dst)
+    except OSError:
+      pass
   elif "df" in command:
     echo = input("Insert Path: ")
     if ".py" in echo:
