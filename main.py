@@ -9,7 +9,7 @@ if (platform == "win32"):
 # Pre-determined variables
 vardir = [
   ["Bootloader.fn","Registry.fn"],
-  ["Booted.var","Location.var","Locationdir.var", "Locationstr.var", "cman.var", "comlistdir.var"],
+  ["Location.var","Locationdir.var", "Locationstr.var", "cman.var", "comlistdir.var"],
   ["Command.inp","Echo.inp"],
   ["Vardir.lst"],
   ["Booted.bool"]
@@ -41,9 +41,21 @@ error_codes = {
 # Print error function for easy re-use; make sure to use the correct error code
 def print_error(error_code, print_error=True):
   try:
-    error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
+    if platform == "Windows":
+      if str(platform.release()) == "10" or str(platform.release()) == "11":
+        error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
+      else:
+        error_message = "Error " + str({error_code})
+    else:
+      error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
   except:
-    raise Exception(f"The error code, {error_code}, is invalid.")
+    if platform == "Windows":
+      if str(platform.release()) == "10" or str(platform.release()) == "11":
+        raise Exception(f"The error code, {error_code}, is invalid.")
+      else:
+        raise Exception("The Error code is invalid.")
+    else:
+      raise Exception(f"The error code, {error_code}, is invalid.")
 
   if (print_error == True):
     print(error_message)
@@ -59,43 +71,43 @@ def clear_screen():
 
 def help_command(command=None):
   if (command == None or command == ""):
-    os.system('cls')
+    clear_screen()
     return "\nTo get help with a specific command, type help <command>\n"
   elif (command == "help"):
-    os.system('cls')
+    clear_screen()
     return "\nbruh\n"
   elif (command == "rd"):
-    os.system('cls')
+    clear_screen()
     return "\nReads a directory you specify.\n\n\tExample: rd About\n\nSyntax:\n\trd <directory_name>\n\nReturns:\n\tThe directory contents of the directory name you specified. In case you specify an invalid/non-existent directory, you will get an error code of 0x004.\n"
   elif (command == "rf"):
-    os.system('cls')
+    clear_screen()
     return "\nReads a file you specify.\n\n\tExample: rf /workspaces/bkernel/docs/Test\n\nSyntax:\n\trf <location of file (path)>\n\nReturns:\n\tThe contents of the filename you specified. In case you specify an invalid/non-existent file, you will get an error code of 0x002.\n"
   elif (command == "wf"):
-    os.system('cls')
+    clear_screen()
     return "\nCreates a file with a given name + data\n"
   elif (command == "wd"):
-    os.system('cls')
+    clear_screen()
     return "\nCreates a directory with a given name."
   elif (command == "df"):
-    os.system('cls')
+    clear_screen()
     return "\nDeletes a file with a given filepath."
   elif (command == "ded"):
-    os.system('cls')
+    clear_screen()
     return "\nDeletes an Empty directory."
   elif (command == "dd"):
-    os.system('cls')
+    clear_screen()
     return "\nDeletes a directory and all of its contents."
   elif (command == "registry"):
-    os.system('cls')
+    clear_screen()
     return "\nDisplays all active variables."
   elif (command == "cls"):
-    os.system('cls')
+    clear_screen()
     return "\nClears your Screen\n"
   elif (command == "cf"):
-    os.system('cls')
+    clear_screen()
     return "\nCopies Files\n"
   elif (command == "rc"):
-    os.system('cls')
+    clear_screen()
     return "\nRuns Code\nCURRENTLY SUPPORTED:\n1. Python\n2. JavaScript"
 #Imported Extensions
 import random
@@ -104,10 +116,22 @@ import time
 #Bootloader
 def Bootloader():
   if booted == False:
-    print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
+    if platform == "Windows":
+      if str(platform.release()) == "10" or str(platform.release()) == "11":
+        print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
+      else:
+        print("Booting B-Kernel...")
+    else:
+      print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
     time.sleep(random.randint(2, 5))
     clear_screen()
-    print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
+    if platform == "Windows":
+      if str(platform.release()) == "10" or str(platform.release()) == "11":
+        print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
+      else:
+        print("Welcome to B Kernel.")
+    else:
+      print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
     return True
   else:
     print_error("0x001")
@@ -133,7 +157,7 @@ def Registry(x = 0):
 booted = Bootloader()
 #Default Directory: /workspaces/bkernel
 while booted == True:
-  locationdir = os.getcwd();
+  locationdir = os.getcwd()
   comlistdir = locationdir + " "
   locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 
@@ -215,7 +239,7 @@ while booted == True:
         if not is_exec(echo):
           line_prepender(echo, "#!/usr/bin/env node")
         if platform == "linux" or platform == "linux2":
-          os.system(f"chmod +x {echo}")
+          os.system("chmod +x" + str({echo}))
         p = subprocess.Popen(["C:\\Program Files\\nodejs\\node.exe", echo])
         # cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
       except OSError as err:
@@ -290,6 +314,11 @@ while booted == True:
     os.mkdir(echo)    
   elif "cls" in command:
     clear_screen()
+  elif "os" in command:
+    try:
+      cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/check.py"]) #Runs Check
+    except OSError:
+      print("An Error Occured while reading this code.")
   elif "exit" in command:
     clear_screen()
     print("Shutting Down...")
