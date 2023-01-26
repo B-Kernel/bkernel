@@ -3,7 +3,8 @@ import shutil
 import subprocess
 from sys import platform
 
-os.system('color')
+if (platform == "win32"):
+  os.system('color')
 
 # Pre-determined variables
 vardir = [
@@ -49,6 +50,12 @@ def print_error(error_code, print_error=True):
     return None
   else:
     return error_message
+
+def clear_screen():
+  if platform == "win32":
+      os.system("cls")
+  else:
+    os.system("clear")
 
 def help_command(command=None):
   if (command == None or command == ""):
@@ -99,7 +106,7 @@ def Bootloader():
   if booted == False:
     print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
     time.sleep(random.randint(2, 5))
-    os.system('cls')
+    clear_screen()
     print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
     return True
   else:
@@ -125,8 +132,6 @@ def Registry(x = 0):
 #Post-Determined Variables
 booted = Bootloader()
 #Default Directory: /workspaces/bkernel
-#I'll do this when I finish with my work D:
-#Okay, I'll make a REGISTRY, you make a Directory sounds good
 while booted == True:
   locationdir = os.getcwd();
   comlistdir = locationdir + " "
@@ -186,7 +191,7 @@ while booted == True:
   elif "rc" in command:
     comlistdir = ""
     echo = input("Insert Path: ")
-    os.system('cls')
+    clear_screen()
     time.sleep(random.randint(2, 5))
     if ".py" in echo:
       try:
@@ -218,7 +223,7 @@ while booted == True:
   elif "wf" in command:
     echo = input("Insert Name: ")
     with open("docs/" + echo, 'w') as f:
-      os.system('cls')
+      clear_screen()
       print("Editing File with Name (" + echo + ").")
       f.write(input(""))
   elif "cf" in command:
@@ -284,9 +289,9 @@ while booted == True:
     echo = input("Insert Directory Name: ")
     os.mkdir(echo)    
   elif "cls" in command:
-    os.system('cls')
+    clear_screen()
   elif "exit" in command:
-    os.system('cls')
+    clear_screen()
     print("Shutting Down...")
     time.sleep(random.randint(0, 5))
     booted = False
