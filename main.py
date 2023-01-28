@@ -61,6 +61,23 @@ def print_error(error_code, print_error=True):
   #   else:
   #     raise Exception(f"The error code, {error_code}, is invalid.")
   print("Error Handling is currently disabled due to bugs. Thank you for your patience. :)")
+=======
+  try:
+    if platform == "Windows":
+      if str(platform.release()) == "10" or str(platform.release()) == "11":
+        error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
+      else:
+        error_message = "Error " + str({error_code})
+    else:
+      error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
+  except:
+    if platform == "Windows":
+      if str(platform.release()) == "10" or str(platform.release()) == "11":
+        raise Exception(f"The error code, {error_code}, is invalid.")
+      else:
+        raise Exception("The Error code is invalid.")
+    else:
+      raise Exception(f"The error code, {error_code}, is invalid.")
 
   if (print_error == True):
     # print(error_message) Need to fix this bug.
