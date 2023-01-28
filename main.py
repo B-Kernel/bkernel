@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+import sys
 from sys import platform
 
 if (platform == "win32"):
@@ -40,6 +41,27 @@ error_codes = {
 
 # Print error function for easy re-use; make sure to use the correct error code
 def print_error(error_code, print_error=True):
+  # try:
+  #   me = str(platform.system()) + " " + str(platform.release())
+  #   if "Windows" in me:
+  #     if "10" in me:
+  #       error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
+  #     elif "11" in me:
+  #       error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
+  #     else:
+  #       error_message = "Error " + str({error_code})
+  #   else:
+  #     error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
+  # except:
+  #   if platform == "win32":
+  #     if str(platform.release()) == "10" or str(platform.release()) == "11":
+  #       raise Exception(f"The error code, {error_code}, is invalid.")
+  #     else:
+  #       raise Exception("The Error code is invalid.")
+  #   else:
+  #     raise Exception(f"The error code, {error_code}, is invalid.")
+  print("Error Handling is currently disabled due to bugs. Thank you for your patience. :)")
+=======
   try:
     if platform == "Windows":
       if str(platform.release()) == "10" or str(platform.release()) == "11":
@@ -58,10 +80,11 @@ def print_error(error_code, print_error=True):
       raise Exception(f"The error code, {error_code}, is invalid.")
 
   if (print_error == True):
-    print(error_message)
+    # print(error_message) Need to fix this bug.
     return None
   else:
-    return error_message
+    return None
+    # return error_message And this bug.
 
 def clear_screen():
   if platform == "win32":
@@ -116,7 +139,7 @@ import time
 #Bootloader
 def Bootloader():
   if booted == False:
-    if platform == "Windows":
+    if platform == "win32":
       if str(platform.release()) == "10" or str(platform.release()) == "11":
         print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
       else:
@@ -125,7 +148,7 @@ def Bootloader():
       print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
     time.sleep(random.randint(2, 5))
     clear_screen()
-    if platform == "Windows":
+    if platform == "win32":
       if str(platform.release()) == "10" or str(platform.release()) == "11":
         print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
       else:
@@ -241,7 +264,11 @@ while booted == True:
         if platform == "linux" or platform == "linux2":
           os.system("chmod +x" + str({echo}))
         p = subprocess.Popen(["C:\\Program Files\\nodejs\\node.exe", echo])
-        # cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
+      except OSError as err:
+        print(err)
+    elif ".rs" in echo:
+      try:
+        open(echo)
       except OSError as err:
         print(err)
   elif "wf" in command:
@@ -316,7 +343,7 @@ while booted == True:
     clear_screen()
   elif "os" in command:
     try:
-      cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/check.py"]) #Runs Check
+      cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/check.py"]) #Runs Check
     except OSError:
       print("An Error Occured while reading this code.")
   elif "exit" in command:
