@@ -1,7 +1,7 @@
 import os
 import shutil
 import subprocess
-from sys import platform
+from sys import version_info
 
 if (platform == "win32"):
   os.system('color')
@@ -41,21 +41,9 @@ error_codes = {
 # Print error function for easy re-use; make sure to use the correct error code
 def print_error(error_code, print_error=True):
   try:
-    if platform == "Windows":
-      if str(platform.release()) == "10" or str(platform.release()) == "11":
-        error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
-      else:
-        error_message = "Error " + str({error_code})
-    else:
-      error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
+    error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
   except:
-    if platform == "Windows":
-      if str(platform.release()) == "10" or str(platform.release()) == "11":
-        raise Exception(f"The error code, {error_code}, is invalid.")
-      else:
-        raise Exception("The Error code is invalid.")
-    else:
-      raise Exception(f"The error code, {error_code}, is invalid.")
+    raise Exception(f"The error code, {error_code}, is invalid.")
 
   if (print_error == True):
     print(error_message)
@@ -116,22 +104,10 @@ import time
 #Bootloader
 def Bootloader():
   if booted == False:
-    if platform == "Windows":
-      if str(platform.release()) == "10" or str(platform.release()) == "11":
-        print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
-      else:
-        print("Booting B-Kernel...")
-    else:
-      print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
+    print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
     time.sleep(random.randint(2, 5))
     clear_screen()
-    if platform == "Windows":
-      if str(platform.release()) == "10" or str(platform.release()) == "11":
-        print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
-      else:
-        print("Welcome to B Kernel.")
-    else:
-      print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
+    print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
     return True
   else:
     print_error("0x001")
