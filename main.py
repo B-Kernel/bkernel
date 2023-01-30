@@ -6,16 +6,13 @@ from sys import version_info
 os.system('color')
 
 # Pre-determined variables
-vardir = [
-  ["Bootloader.fn","Registry.fn", "Subproram.fn"],
-  ["Location.var","Locationdir.var", "Locationstr.var", "cman.var", "comlistdir.var"],
-  ["Command.inp","Echo.inp"],
-  ["Vardir.lst"],
-  ["Booted.bool", "Subprogram.bool"]
-]
+location = 0
+locationdir = os.getcwd()
+comlistdir = locationdir + " "
+locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~1.py"])
 subprogram = False
 booted = False
-location = 0
 
 # Colors | For more help; see https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 class bcolors:
@@ -109,56 +106,22 @@ def Bootloader():
     return True
   else:
     print_error("0x001")
-#Registry
-def Registry(x = 0):
-  if x == 0: #Prints all Commands
-    print(vardir[0]) #.fn Commands
-    print(vardir[1]) #.var Commands
-    print(vardir[2]) #.inp Commands
-    print(vardir[3]) #.lst Commands
-    print(vardir[4]) #.bool Commands
-  elif x == "fn":
-    print(vardir[0]) #only prints .fn Commands
-  elif x == "var":
-    print(vardir[1]) #only prints .var Commands
-  elif x == "inp":
-    print(vardir[2]) #only prints .inp Commands
-  elif x == "lst":
-    print(vardir[3]) #only prints .lst Commands
-  elif x == "bool":
-    print(vardir[4]) # only prints .bool Commands
+
 #Post-Determined Variables
 booted = Bootloader()
 #Default Directory: /workspaces/bkernel
 while booted == True:
+  command = str(input(os.getcwd() + " "))
   locationdir = os.getcwd()
   comlistdir = locationdir + " "
   locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
-
-  command = str(input(os.getcwd() + " "))
-
   if "registry" in command:
-    if command == "registry fn":
-      Registry("fn")
-    elif command == "registry var":
-      Registry("var")
-    elif command == "registry inp":
-      Registry("inp")
-    elif command == "registry lst":
-      Registry("lst")
-    elif command == "registry bool":
-      Registry("bool")
-    elif command == "registry":
-      Registry()
-    else:
-      print_error("0x002")
+    #Registry
+    subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~2.py"])
   elif "execute" in command:
     if command == "execute Bootloader.fn":
       Bootloader()
       print("Completed.")
-    elif command == "execute Registry.fn":
-      Registry()
-      print("Completed")
     elif command == "execute Booted.bool":
       print(str(booted) + "\n" + "Done!")
     else:
