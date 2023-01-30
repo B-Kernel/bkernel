@@ -3,17 +3,17 @@ import shutil
 import subprocess
 from sys import version_info
 
-if (platform == "win32"):
-  os.system('color')
+os.system('color')
 
 # Pre-determined variables
 vardir = [
-  ["Bootloader.fn","Registry.fn"],
+  ["Bootloader.fn","Registry.fn", "Subproram.fn"],
   ["Location.var","Locationdir.var", "Locationstr.var", "cman.var", "comlistdir.var"],
   ["Command.inp","Echo.inp"],
   ["Vardir.lst"],
-  ["Booted.bool"]
+  ["Booted.bool", "Subprogram.bool"]
 ]
+subprogram = False
 booted = False
 location = 0
 
@@ -52,9 +52,7 @@ def print_error(error_code, print_error=True):
     return error_message
 
 def clear_screen():
-  if platform == "win32":
-      os.system("cls")
-  else:
+    os.system("cls")
     os.system("clear")
 
 def help_command(command=None):
@@ -292,9 +290,49 @@ while booted == True:
     clear_screen()
   elif "os" in command:
     try:
-      cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/check.py"]) #Runs Check
+      cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/check.py"]) #Runs Check
     except OSError:
       print("An Error Occured while reading this code.")
+  elif "delta" in command:
+    try:
+      cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/clock.py"])
+    except OSError as err:
+      print(err)
+  elif "calc" in command:
+    #B-Kernel Calculator
+    import os
+    import math
+    def add(val1, val2):
+      print(val1 + val2)
+    def sub(val1, val2):
+      print(val1 - val2)
+    def mlt(val1, val2):
+      print(val1 * val2)
+    def div(val1, val2):
+      print( val1 / val2 )
+    def exp(val1, val2):
+      print( val1 ** val2 )
+    def fldiv(val1, val2):
+      print( val1 // val2 )
+    def rem(val1,val2):
+      print( val1 % val2 )
+    command = input()
+    if command == "add" or command == "Add" or command == "ADD":
+      add(int(input()), int(input()))
+    elif command == "subtract" or command == "Subtract" or command == "SUBTRACT":
+      sub(int(input()), int(input()))
+    elif command == "multiply" or command == "Multiply" or command == "MULTIPLY":
+      mlt(int(input()), int(input()))
+    elif command == "divide" or command == "Divide" or command == "DIVIDE":
+      div(int(input()), int(input()))
+    elif command == "exponent" or command == "Exponent" or command == "EXPONENT":
+      exp(int(input()), int(input()))
+    elif command == "floor" or command == "Floor" or command == "FLOOR":
+      sub(int(input()), int(input()))
+    elif command == "remainder" or command == "Remainder" or command == "REMAINDER":
+      sub(int(input()), int(input()))
+    else:
+      print("Command / Operation Not Found.")
   elif "exit" in command:
     clear_screen()
     print("Shutting Down...")
