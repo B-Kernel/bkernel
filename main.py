@@ -194,6 +194,14 @@ while booted == True:
       shutil.copyfile(src, dst)
     except OSError:
       pass
+  elif "mvf" in command:
+    try:
+      src = input("Insert Old Path [including file]: ")
+      dst = input("Insert New Path [including file]: ")
+      shutil.copyfile(src,dst)
+      os.remove(src)
+    except OSError as err:
+      print(err)
   elif "df" in command:
     echo = input("Insert Path: ")
     if ".py" in echo:
