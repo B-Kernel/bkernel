@@ -2,7 +2,6 @@ import os
 import shutil
 import subprocess
 from sys import version_info
-
 # Pre-determined variables
 location = 0
 locationdir = os.getcwd()
