@@ -2,9 +2,6 @@ import os
 import shutil
 import subprocess
 from sys import version_info
-
-os.system('color')
-
 # Pre-determined variables
 location = 0
 locationdir = os.getcwd()
@@ -49,7 +46,6 @@ def print_error(error_code, print_error=True):
     return error_message
 
 def clear_screen():
-    os.system("cls")
     os.system("clear")
 
 def help_command(command=None):
@@ -99,7 +95,9 @@ import time
 #Bootloader
 def Bootloader():
   if booted == False:
-    print(f"{bcolors.BOLD}{bcolors.WARNING}Booting B Kernel...{bcolors.ENDC}")
+    print("B-Kernel")
+    print("(c) B-Kernel, 2023")
+    print("Version 1.130.0")
     time.sleep(random.randint(2, 5))
     clear_screen()
     print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
@@ -175,8 +173,7 @@ while booted == True:
               return True
         if not is_exec(echo):
           line_prepender(echo, "#!/usr/bin/env node")
-        if platform == "linux" or platform == "linux2":
-          os.system("chmod +x" + str({echo}))
+        os.system("chmod +x" + str({echo}))
         p = subprocess.Popen(["C:\\Program Files\\nodejs\\node.exe", echo])
         # cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
       except OSError as err:
