@@ -118,10 +118,10 @@ while booted == True:
   locationdir = os.getcwd()
   comlistdir = locationdir + " "
   locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
-  if "registry" in command:
+  if command == "registry":
     #Registry
     subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~2.py"])
-  elif "execute" in command:
+  elif command == "execute":
     if command == "execute Bootloader.fn":
       Bootloader()
       print("Completed.")
@@ -129,12 +129,12 @@ while booted == True:
       print(str(booted) + "\n" + "Done!")
     else:
       print_error("0x003")
-  elif "echo" in command: #echo
+  elif command == "echo": #echo
       echo = input()
       print("\"" + str(echo) + "\"")
-  elif "whereami" in command: #wherami
+  elif command == "whereami": #wherami
     print(locationdir)
-  elif "cd" in command:
+  elif command == "cd":
     locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
     echo = input("Insert New Directory (Located in " + locationdir + ") ")
     
@@ -147,12 +147,12 @@ while booted == True:
     print(help_command(command_help))
   elif command == "rd":
     print(os.listdir(locationdir))
-  elif "rf" in command:
+  elif command == "rf":
     echo = input("Insert Path: ")
     cman = open(echo,"r")
     print(cman.read())
     cman.close
-  elif "rc" in command:
+  elif command =="rc":
     comlistdir = ""
     echo = input("Insert Path: ")
     clear_screen()
@@ -182,20 +182,20 @@ while booted == True:
         # cmancode = subprocess.Popen(["javascript", echo]) #Runs JS Code!
       except OSError as err:
         print(err)
-  elif "wf" in command:
+  elif command == "wf":
     echo = input("Insert Name: ")
     with open("docs/" + echo, 'w') as f:
       clear_screen()
       print("Editing File with Name (" + echo + ").")
       f.write(input(""))
-  elif "cf" in command:
+  elif command == "cf":
     try:
       src = input("Insert path (of old file): ")
       dst = input("Insert path of new file: ")
       shutil.copyfile(src, dst)
     except OSError:
       pass
-  elif "mvf" in command:
+  elif command == "mvf":
     try:
       src = input("Insert Old Path [including file]: ")
       dst = input("Insert New Path [including file]: ")
@@ -203,10 +203,19 @@ while booted == True:
       os.remove(src)
     except OSError as err:
       print(err)
-  elif "df" in command:
+  elif command == "ef":
+    echoo = input("Insert Filepath: ")
+    with open(echoo, 'a') as a:
+      clear_screen()
+      print("Editing (" + echoo + ").")
+      print(" ")
+      d = open(echoo,"r")
+      c = d.read()
+      a.write(input(c))
+  elif command == "df":
     echo = input("Insert Path: ")
     if ".py" in echo:
-      if "main.py" in echo:
+      if "windows.py" in echo:
         print("Access Denied.")
       else:
         eco = input("This file might contain important data files. Are you sure you want to continue? [Y/N] ")
@@ -246,7 +255,7 @@ while booted == True:
         pass
     else:
       os.remove(echo)
-  elif "ded" in command:
+  elif command == "ded":
     echo = input("Insert Directory Path: ")
     os.rmdir(echo)
   elif "dd" in command:
@@ -255,22 +264,22 @@ while booted == True:
       shutil.rmtree(echo)
     except OSError as Error:
       print_error("0x004")
-  elif "wd" in command:
+  elif command == "wd":
     echo = input("Insert Directory Name: ")
     os.mkdir(echo)    
-  elif "cls" in command:
+  elif command == "cls":
     clear_screen()
-  elif "os" in command:
+  elif command == "os":
     try:
       cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/check.py"]) #Runs Check
     except OSError:
       print("An Error Occured while reading this code.")
-  elif "delta" in command:
+  elif command == "delta":
     try:
       cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/clock.py"])
     except OSError as err:
       print(err)
-  elif "calc" in command:
+  elif command == "calc":
     #B-Kernel Calculator
     import os
     import math
@@ -305,7 +314,7 @@ while booted == True:
       sub(int(input()), int(input()))
     else:
       print("Command / Operation Not Found.")
-  elif "exit" in command:
+  elif command == "exit":
     clear_screen()
     print("Shutting Down...")
     time.sleep(random.randint(0, 5))
