@@ -141,6 +141,11 @@ while booted == True:
     cman = open(echo,"r")
     print(cman.read())
     cman.close
+  elif command == "history":
+    placement = 0
+    for i in history:
+      placement += 1
+      print(str(placement) + ". " + i)
   elif command =="rc":
     comlistdir = ""
     echo = input("Insert Path: ")

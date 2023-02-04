@@ -12,6 +12,7 @@ locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~1.py"])
 subprogram = False
 booted = False
+history = []
 # Colors
 class bcolors:
     HEADER = '\033[95m'
@@ -110,6 +111,7 @@ while booted == True:
   locationdir = os.getcwd()
   comlistdir = locationdir + " "
   locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+  history.append("\"" + command + "\"")
   if command == "registry":
     #Registry
     subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~2.py"])
@@ -144,6 +146,11 @@ while booted == True:
     cman = open(echo,"r")
     print(cman.read())
     cman.close
+  elif command == "history":
+    placement = 0
+    for i in history:
+      placement += 1
+      print(str(placement) + ". " + i)
   elif command =="rc":
     comlistdir = ""
     echo = input("Insert Path: ")
