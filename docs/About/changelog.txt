@@ -1,0 +1,4 @@
+NAME: B-Kernel 2.100.0
+BUILD: 2.100.0
+DATE: Feb 5 2022
+CHANGES: Added changelog.txt
