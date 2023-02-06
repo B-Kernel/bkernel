@@ -1,3 +1,8 @@
+NAME: B-Kernel 2.110.0
+BUILD: 2.100.0
+DATE: Feb 6 2022
+CHANGES: Removed vardir.lst, Added types.lst and variables .dct [Dictionary]
+
 NAME: B-Kernel 2.100.0
 BUILD: 2.100.0
 DATE: Feb 5 2022

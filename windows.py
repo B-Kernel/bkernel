@@ -94,7 +94,7 @@ import time
 def Bootloader():
   if booted == False:
     os.system('color e0')
-    print("B-Kernel")
+    print("")
     print("(c) B-Kernel, 2023")
     print("Version 2.0.0")
     time.sleep(random.randint(2, 5))
