@@ -1,3 +1,4 @@
+#Imported Variables
 import os
 import shutil
 import subprocess
@@ -10,8 +11,7 @@ locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~1.py"])
 subprogram = False
 booted = False
-
-# Colors | For more help; see https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
+# Colors
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -22,8 +22,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-
-# The error codes are in this dictionary for easy re-use; add new ones whenever you wish :)
+# Error Codes
 error_codes = {
   "0x001": "The 'bootloader' instance is already running.",
   "0x002": "The item you were searching for was not found.",
@@ -31,8 +30,7 @@ error_codes = {
   "0x004": "The directory is not accessible.",
   "0x005": "That command doesn't exist. Type 'help' for a list of available commands."
 }
-
-# Print error function for easy re-use; make sure to use the correct error code
+# Declaring Functions
 def print_error(error_code, print_error=True):
   try:
     error_message = f"{bcolors.FAIL}Error code {error_code}: {error_codes[error_code]}{bcolors.ENDC}"
@@ -44,10 +42,8 @@ def print_error(error_code, print_error=True):
     return None
   else:
     return error_message
-
 def clear_screen():
     os.system("clear")
-
 def help_command(command=None):
   if (command == None or command == ""):
     clear_screen()
@@ -97,17 +93,15 @@ def Bootloader():
   if booted == False:
     print("B-Kernel")
     print("(c) B-Kernel, 2023")
-    print("Version 1.130.0")
+    print("Version 2.0.0")
     time.sleep(random.randint(2, 5))
     clear_screen()
     print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
     return True
   else:
     print_error("0x001")
-
-#Post-Determined Variables
+#Calling Bootloader
 booted = Bootloader()
-#Default Directory: /workspaces/bkernel
 while booted == True:
   command = str(input(os.getcwd() + " "))
   locationdir = os.getcwd()
@@ -147,6 +141,11 @@ while booted == True:
     cman = open(echo,"r")
     print(cman.read())
     cman.close
+  elif command == "history":
+    placement = 0
+    for i in history:
+      placement += 1
+      print(str(placement) + ". " + i)
   elif command =="rc":
     comlistdir = ""
     echo = input("Insert Path: ")

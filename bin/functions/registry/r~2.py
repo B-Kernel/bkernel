@@ -4,16 +4,22 @@ import subprocess
 from sys import version_info
 
 locationdir = os.getcwd()
-vardir = [
-  ["Bootloader.fn"],
-  ["Location.var","Locationdir.var", "Locationstr.var", "cman.var", "comlistdir.var"],
-  ["Command.inp","Echo.inp"],
-  ["Vardir.lst"],
-  ["Booted.bool"]
-]
+types = ["fn", "var", "inp", "lst", "bool", "dct"]
 
-print(vardir[0]) #.fn Commands
-print(vardir[1]) #.var Commands
-print(vardir[2]) #.inp Commands
-print(vardir[3]) #.lst Commands
-print(vardir[4]) #.bool Commands
+variables = {
+  "Booted" : types[4],
+  "Bootloader" : types[0],
+  "Cman" : types[1],
+  "Comlistdir" : types[1],
+  "Command" : types[2],
+  "Echo" : types[2],
+  "Location" : types[1],
+  "Locationdir" : types[1],
+  "Locationstr" : types[1],
+  "Types" : types[3],
+  "Variables" : types[5]
+}
+
+
+for i in variables:
+  print(i, variables[i])
