@@ -273,6 +273,37 @@ while booted == True:
       cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/clock.py"])
     except OSError as err:
       print(err)
+  elif command == "dho convert":
+    echo = int(input("Insert Number: "))
+    print("DECIMAL: " + str(echo))
+    octal = oct(echo)
+    octallist = []
+    octalresult = ""
+    for i in octal:
+      octallist.append(i)
+    octalpos = 0
+    for i in octallist:
+      if octalpos < 2:
+        octalpos += 1
+        pass
+      else:
+        octalpos += 1
+        octalresult += str(i)
+    print("OCTAL: " + octalresult)
+    hexa = hex(echo)
+    hexalist = []
+    hexaresult = ""
+    for i in hexa:
+      hexalist.append(i)
+    hexapos = 0
+    for i in hexalist:
+      if hexapos < 2:
+        hexapos += 1
+        pass
+      else:
+        hexapos += 1
+        hexaresult += str(i)
+    print("HEXADECIMAL: " + hexaresult)
   elif command == "calc":
     #B-Kernel Calculator
     import os
