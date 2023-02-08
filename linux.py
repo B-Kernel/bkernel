@@ -3,14 +3,22 @@ import os
 import shutil
 import subprocess
 from sys import version_info
+
 # Pre-determined variables
 location = 0
+
 locationdir = os.getcwd()
+
 comlistdir = locationdir + " "
+
 locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+
 cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~1.py"])
+
 subprogram = False
+
 booted = False
+
 # Colors
 class bcolors:
     HEADER = '\033[95m'
@@ -22,6 +30,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
 # Error Codes
 error_codes = {
   "0x001": "The 'bootloader' instance is already running.",
@@ -30,6 +39,7 @@ error_codes = {
   "0x004": "The directory is not accessible.",
   "0x005": "That command doesn't exist. Type 'help' for a list of available commands."
 }
+
 # Declaring Functions
 def print_error(error_code, print_error=True):
   try:
@@ -37,87 +47,140 @@ def print_error(error_code, print_error=True):
   except:
     raise Exception(f"The error code, {error_code}, is invalid.")
 
+
   if (print_error == True):
     print(error_message)
     return None
   else:
     return error_message
+  
+
 def clear_screen():
     os.system("clear")
+
+
 def help_command(command=None):
   if (command == None or command == ""):
     clear_screen()
+
     return "\nTo get help with a specific command, type help <command>\n"
+
   elif (command == "help"):
     clear_screen()
+
     return "\nbruh\n"
+
   elif (command == "rd"):
     clear_screen()
+
     return "\nReads a directory you specify.\n\n\tExample: rd About\n\nSyntax:\n\trd <directory_name>\n\nReturns:\n\tThe directory contents of the directory name you specified. In case you specify an invalid/non-existent directory, you will get an error code of 0x004.\n"
+
   elif (command == "rf"):
     clear_screen()
+
     return "\nReads a file you specify.\n\n\tExample: rf /workspaces/bkernel/docs/Test\n\nSyntax:\n\trf <location of file (path)>\n\nReturns:\n\tThe contents of the filename you specified. In case you specify an invalid/non-existent file, you will get an error code of 0x002.\n"
+
   elif (command == "wf"):
     clear_screen()
+
     return "\nCreates a file with a given name + data\n"
+
   elif (command == "wd"):
     clear_screen()
+
     return "\nCreates a directory with a given name."
+
   elif (command == "df"):
     clear_screen()
+
     return "\nDeletes a file with a given filepath."
+
   elif (command == "ded"):
     clear_screen()
+
     return "\nDeletes an Empty directory."
+
   elif (command == "dd"):
     clear_screen()
+
     return "\nDeletes a directory and all of its contents."
+
   elif (command == "registry"):
     clear_screen()
+
     return "\nDisplays all active variables."
+
   elif (command == "cls"):
     clear_screen()
+
     return "\nClears your Screen\n"
+
   elif (command == "cf"):
     clear_screen()
+
     return "\nCopies Files\n"
+
   elif (command == "rc"):
     clear_screen()
+
     return "\nRuns Code\nCURRENTLY SUPPORTED:\n1. Python\n2. JavaScript"
+
 #Imported Extensions
 import random
 import os
 import time
+
 #Bootloader
 def Bootloader():
   if booted == False:
     print("B-Kernel")
     print("(c) B-Kernel, 2023")
     print("Version 2.0.0")
-    time.sleep(random.randint(2, 5))
+
+    #bkernel will start at any amount of time between 2 seconds and 5 seconds randomly
+    time.sleep(random.randint(2, 5)) 
+
     clear_screen()
+
     print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
+    
     return True
+
   else:
     print_error("0x001")
+
 #Calling Bootloader
 booted = Bootloader()
+
+#while the program is booted, interperet commands given
 while booted == True:
   command = str(input(os.getcwd() + " "))
+
   locationdir = os.getcwd()
+
   comlistdir = locationdir + " "
+
   locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+
   if command == "registry":
     #Registry
     subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~2.py"])
+
+  #checks to see which file needs to be executed
   elif command == "execute":
-    if command == "execute Bootloader.fn":
-      Bootloader()
-      print("Completed.")
-    elif command == "execute Booted.bool":
-      print(str(booted) + "\n" + "Done!")
+    echo = input("Do you want to run a specific command? (Y or N)")
+    if echo == "n":
+      pass
     else:
-      print_error("0x003")
+      if echo == "y":
+        command == input("Insert Command to Execute: [Syntax - execute <command>]")
+        if command == "execute Bootloader.fn":
+          Bootloader()
+          print("Completed.")
+        elif command == "execute Booted.bool":
+          print(str(booted) + "\n" + "Done!")
+        else:
+          print_error("0x003")
   elif command == "echo": #echo
       echo = input()
       print("\"" + str(echo) + "\"")

@@ -116,13 +116,19 @@ while booted == True:
     #Registry
     subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~2.py"])
   elif command == "execute":
-    if command == "execute Bootloader.fn":
-      Bootloader()
-      print("Completed.")
-    elif command == "execute Booted.bool":
-      print(str(booted) + "\n" + "Done!")
+    echo = input("Do you want to run a specific command? (Y or N)")
+    if echo == "n":
+      pass
     else:
-      print_error("0x003")
+      if echo == "y":
+        command == input("Insert Command to Execute: [Syntax - execute <command>]")
+        if command == "execute Bootloader.fn":
+          Bootloader()
+          print("Completed.")
+        elif command == "execute Booted.bool":
+          print(str(booted) + "\n" + "Done!")
+        else:
+          print_error("0x003")
   elif command == "echo": #echo
       echo = input()
       print("\"" + str(echo) + "\"")
