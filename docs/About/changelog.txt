@@ -1,3 +1,8 @@
+NAME: B-Kernel 2.130.0
+BUILD: 2.130.0
+DATE: Feb 8-9 2022
+CHANGES: Updated changelog.txt, added bidirectional RGB and HEX conversion.
+
 NAME: B-Kernel 2.120.0
 BUILD: 2.120.0
 DATE: Feb 8-9 2022
