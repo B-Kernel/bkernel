@@ -1,5 +1,10 @@
+NAME: B-Kernel 2.120.0
+BUILD: 2.120.0
+DATE: Feb 8-9 2022
+CHANGES: Fixed Execute, Added Whitespace + Documentation, added DHO Conversion
+
 NAME: B-Kernel 2.110.0
-BUILD: 2.100.0
+BUILD: 2.110.0
 DATE: Feb 6 2022
 CHANGES: Removed vardir.lst, Added types.lst and variables .dct [Dictionary]
 
