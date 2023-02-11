@@ -498,6 +498,8 @@ while booted == True:
       sub(int(input()), int(input()))
     else:
       print("Command / Operation Not Found.")
+  elif command == "tip":
+    subprocess.Popen(["python", str(locationdir) + "/bin/functions/lnxtips.py"])
   elif command == "exit":
     clear_screen()
     print("Shutting Down...")
