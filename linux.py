@@ -5,8 +5,6 @@ import subprocess
 from sys import version_info
 
 # Pre-determined variables
-location = 0
-
 locationdir = os.getcwd()
 
 comlistdir = locationdir + " "
@@ -14,8 +12,6 @@ comlistdir = locationdir + " "
 locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 
 cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~1.py"])
-
-subprogram = False
 
 booted = False
 
