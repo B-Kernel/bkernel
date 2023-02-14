@@ -2,10 +2,13 @@
 import os
 import shutil
 import subprocess
+import time
 from sys import version_info
 
 # Pre-determined variables
 locationdir = os.getcwd()
+
+history = []
 
 comlistdir = locationdir + " "
 
@@ -54,72 +57,35 @@ def print_error(error_code, print_error=True):
 def clear_screen():
     os.system("clear")
 
+help = {
+  "help" : "Bruh.\n",
+  "registry" : "Lists active variables.\nSYNTAX: registry\n",
+  "execute" : "Executes a function OR an application.\nSYNTAX: execute <function>\n",
+  "whereami" : "Specifies the current working directory.\nSYNTAX: whereami\n",
+  "cd" : "Changes Directory.\nSYNTAX: cd\n",
+  "rd" : "Reads the contents of the Directory.\nSYNTAX: rd\n",
+  "rf" : "Reads the contents of a File.\nSYNTAX: rf\n",
+  "wd" : "Creates a directory with a given name.\nSYNTAX: wd\n",
+  "wf" : "Creates a file with a given name + data.\nSYNTAX: wf\n",
+  "mvf" : "Moves a file with a given path.\nSYNTAX: mvf\n",
+  "ef" : "Edits a file with a given path.\nSYNTAX: ef\n",
+  "rc" : "Runs code with a given path.\nSYNTAX: rc\n",
+  "cls": "Clears the Screen.\nSYNTAX: cls\n",
+  "delta":"Clock.\n",
+  "calc":"Calculator.\nSYNTAX: calc\n",
+  "os": "Gets the current OS + OS Version.\nSYNTAX: os"
+}
 
 def help_command(command=None):
-  if (command == None or command == ""):
-    clear_screen()
-
-    return "\nTo get help with a specific command, type help <command>\n"
-
-  elif (command == "help"):
-    clear_screen()
-
-    return "\nbruh\n"
-
-  elif (command == "rd"):
-    clear_screen()
-
-    return "\nReads a directory you specify.\n\n\tExample: rd About\n\nSyntax:\n\trd <directory_name>\n\nReturns:\n\tThe directory contents of the directory name you specified. In case you specify an invalid/non-existent directory, you will get an error code of 0x004.\n"
-
-  elif (command == "rf"):
-    clear_screen()
-
-    return "\nReads a file you specify.\n\n\tExample: rf /workspaces/bkernel/docs/Test\n\nSyntax:\n\trf <location of file (path)>\n\nReturns:\n\tThe contents of the filename you specified. In case you specify an invalid/non-existent file, you will get an error code of 0x002.\n"
-
-  elif (command == "wf"):
-    clear_screen()
-
-    return "\nCreates a file with a given name + data\n"
-
-  elif (command == "wd"):
-    clear_screen()
-
-    return "\nCreates a directory with a given name."
-
-  elif (command == "df"):
-    clear_screen()
-
-    return "\nDeletes a file with a given filepath."
-
-  elif (command == "ded"):
-    clear_screen()
-
-    return "\nDeletes an Empty directory."
-
-  elif (command == "dd"):
-    clear_screen()
-
-    return "\nDeletes a directory and all of its contents."
-
-  elif (command == "registry"):
-    clear_screen()
-
-    return "\nDisplays all active variables."
-
-  elif (command == "cls"):
-    clear_screen()
-
-    return "\nClears your Screen\n"
-
-  elif (command == "cf"):
-    clear_screen()
-
-    return "\nCopies Files\n"
-
-  elif (command == "rc"):
-    clear_screen()
-
-    return "\nRuns Code\nCURRENTLY SUPPORTED:\n1. Python\n2. JavaScript"
+  clear_screen()
+  if command in help:
+    return command + ": " + help[command]
+  elif command == None:
+    for i in help:
+      print( i + ": " + help[i] )
+    return "\nPossible Help Options."
+  else:
+    return print_error("0x002", print_error=True)
 
 #Imported Extensions
 import random
@@ -129,19 +95,11 @@ import time
 #Bootloader
 def Bootloader():
   if booted == False:
-    print("B-Kernel")
-    print("(c) B-Kernel, 2023")
-    print("Version 2.0.0")
-
-    #bkernel will start at any amount of time between 2 seconds and 5 seconds randomly
-    time.sleep(random.randint(2, 5)) 
-
+    print("B-Kernel 3")
+    print("(c) 2023")
+    time.sleep(random.randint(2, 5))
     clear_screen()
-
-    print(f"{bcolors.WARNING}Welcome to {bcolors.BOLD}B Kernel{bcolors.ENDC}")
-    
     return True
-
   else:
     print_error("0x001")
 
@@ -157,6 +115,8 @@ while booted == True:
   comlistdir = locationdir + " "
 
   locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+
+  history.append("\"" + command + "\"")
 
   if command == "registry":
     #Registry
