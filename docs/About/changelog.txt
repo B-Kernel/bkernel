@@ -1,3 +1,8 @@
+NAME: B-Kernel 2.200.0
+BUILD: 2.200.0
+DATE: Feb 14 2022
+CHANGES: Added 'tips', Improved Help, and fixed History bug in Linux.py. Updated Changelog.txt
+
 NAME: B-Kernel 2.130.0
 BUILD: 2.130.0
 DATE: Feb 8-9 2022
