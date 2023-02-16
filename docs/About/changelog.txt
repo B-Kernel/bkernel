@@ -1,3 +1,8 @@
+NAME: B-Kernel 2.300.0
+BUILD: 2.300.0
+DATE: Feb 16 2022
+CHANGES: Added Operations ($EXIT, $REGISTRY, $EXECUTE), migrated DHO, RGB~HEX, and HEX~RGB Conversion to be stored within the Calculator application, Updated Changelog.txt.
+
 NAME: B-Kernel 2.200.0
 BUILD: 2.200.0
 DATE: Feb 14 2022
