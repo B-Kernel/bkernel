@@ -118,12 +118,12 @@ while booted == True:
 
   history.append("\"" + command + "\"")
 
-  if command == "registry":
+  if command == "$REGISTRY":
     #Registry
     subprocess.Popen(["python", str(locationdir) + "/bin/functions/registry/r~2.py"])
 
   #checks to see which file needs to be executed
-  elif command == "execute":
+  elif command == "$EXECUTE":
     echo = input("Do you want to run a specific command? (Y or N)")
     if echo == "n":
       pass
@@ -456,7 +456,7 @@ while booted == True:
       print("Command / Operation Not Found.")
   elif command == "tip":
     subprocess.Popen(["python", str(locationdir) + "/bin/functions/lnxtips.py"])
-  elif command == "exit":
+  elif command == "$EXIT":
     clear_screen()
     print("Shutting Down...")
     time.sleep(random.randint(0, 5))
