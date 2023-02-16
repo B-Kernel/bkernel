@@ -326,10 +326,21 @@ while booted == True:
         print(err)
   elif command == "wf":
     echo = input("Insert Name: ")
-    with open("docs/" + echo, 'w') as f:
-      clear_screen()
-      print("Editing File with Name (" + echo + ").")
-      f.write(input(""))
+    try:
+      with open("docs/" + echo, 'w') as filer:
+        os.system('cls')
+        print("Write Text Here...")
+        File_Temp = True
+        while File_Temp == True:
+          me = input()
+          if me != "$EXIT":
+            filer.write(me)
+            filer.write("\n")
+          else:
+            filer.close()
+            break
+    except:
+      pass
   elif command == "cf":
     try:
       src = input("Insert path (of old file): ")
@@ -353,7 +364,22 @@ while booted == True:
       print(" ")
       d = open(echoo,"r")
       c = d.read()
-      a.write(input(c))
+      print(c)
+      try:
+        with open(echoo, 'a') as filer:
+          os.system('cls')
+          print("Write Text Here...")
+          File_Temp = True
+          while File_Temp == True:
+            me = input()
+            if me != "$EXIT":
+              filer.write(me)
+              filer.write("\n")
+            else:
+              filer.close()
+              break
+      except:
+        pass
   elif command == "df":
     echo = input("Insert Path: ")
     if ".py" in echo:
