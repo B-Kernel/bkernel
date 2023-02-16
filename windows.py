@@ -91,8 +91,141 @@ def Bootloader():
     return True
   else:
     print_error("0x001")
+
+def hex_rgb():
+    hex = input("Insert HEX: ")
+    hexdictionary = {
+      "0":"0",
+      "1":"1",
+      "2":"2",
+      "3":"3",
+      "4":"4",
+      "5":"5",
+      "6":"6",
+      "7":"7",
+      "8":"8",
+      "9":"9",
+      "a":"10",
+      "b":"11",
+      "c":"12",
+      "d":"13",
+      "e":"14",
+      "f":"15",
+      "A":"10",
+      "B":"11",
+      "C":"12",
+      "D":"13",
+      "E":"14",
+      "F":"15"
+    }
+    hex1 = []
+    hex2 = []
+    hex3 = []
+    hex1.append(hex[0])
+    hex1.append(hex[1])
+    hex2.append(hex[2])
+    hex2.append(hex[3])
+    hex3.append(hex[4])
+    hex3.append(hex[5])
+    R = []
+    G = []
+    B = []
+    for i in hex1:
+      i = int(hexdictionary[i])
+      R.append(i)
+    for i in hex2:
+      i = int(hexdictionary[i])
+      G.append(i)
+    for i in hex3:
+      i = int(hexdictionary[i])
+      B.append(i)
+    r = R[0] * 16 + R[1]
+    g = G[0] * 16 + G[1]
+    b = B[0] * 16 + B[1]
+    print(str(r) + ", " + str(g) + ", " + str(b))
+
+def rgb_hex():
+  #inputs
+  rgbdictionary = {
+    "0":"0",
+    "1":"1",
+    "2":"2",
+    "3":"3",
+    "4":"4",
+    "5":"5",
+    "6":"6",
+    "7":"7",
+    "8":"8",
+    "9":"9",
+    "10":"A",
+    "11":"B",
+    "12":"C",
+    "13":"D",
+    "14":"E",
+    "15":"F"
+  }
+  R = int(input("Insert R: "))
+  G = int(input("Insert G: "))
+  B = int(input("Insert B: "))
+  def rgbtohex(r,g,b,hexdict):
+    rtime = 0
+    gtime = 0
+    btime = 0
+    while r >= 16:
+      rtime += 1
+      r -= 16
+    while g >= 16:
+      gtime += 1
+      g -= 16
+    while b >= 16:
+      btime += 1
+      b -= 16
+    r = hexdict[str(r)]
+    rtime = hexdict[str(rtime)]
+    g = hexdict[str(g)]
+    gtime = hexdict[str(gtime)]
+    b = hexdict[str(b)]
+    btime = hexdict[str(btime)]
+    print(str(rtime) + str(r) + str(gtime) + str(g) + str(btime) + str(b))
+  rgbtohex(R,G,B,rgbdictionary)
+
+def dho():
+  echo = int(input("Insert Number: "))
+  print("DECIMAL: " + str(echo))
+  octal = oct(echo)
+  octallist = []
+  octalresult = ""
+  for i in octal:
+    octallist.append(i)
+  octalpos = 0
+  for i in octallist:
+    if octalpos < 2:
+      octalpos += 1
+      pass
+    else:
+      octalpos += 1
+      octalresult += str(i)
+  print("OCTAL: " + octalresult)
+  hexa = hex(echo)
+  hexalist = []
+  hexaresult = ""
+  for i in hexa:
+    hexalist.append(i)
+  hexapos = 0
+  for i in hexalist:
+    if hexapos < 2:
+      hexapos += 1
+      pass
+    else:
+      hexapos += 1
+      hexaresult += str(i)
+  print("HEXADECIMAL: " + hexaresult)
+
 #Calling Bootloader
+
+
 booted = Bootloader()
+
 while booted == True:
   command = str(input(os.getcwd() + " "))
   locationdir = os.getcwd()
@@ -119,7 +252,6 @@ while booted == True:
   elif command == "cd":
     locationstr = os.listdir(os.path.dirname(os.path.realpath(__file__)))
     echo = input("Insert New Directory (Located in " + locationdir + ") ")
-    
     try:
       os.chdir(echo)
     except OSError:
@@ -269,133 +401,6 @@ while booted == True:
       cmancode = subprocess.Popen(["python", str(locationdir) + "/bin/functions/clock.py"])
     except OSError as err:
       print(err)
-  elif command == "hex_rgb convert":
-    hex = input("Insert HEX: ")
-    hexdictionary = {
-      "0":"0",
-      "1":"1",
-      "2":"2",
-      "3":"3",
-      "4":"4",
-      "5":"5",
-      "6":"6",
-      "7":"7",
-      "8":"8",
-      "9":"9",
-      "a":"10",
-      "b":"11",
-      "c":"12",
-      "d":"13",
-      "e":"14",
-      "f":"15",
-      "A":"10",
-      "B":"11",
-      "C":"12",
-      "D":"13",
-      "E":"14",
-      "F":"15"
-    }
-    hex1 = []
-    hex2 = []
-    hex3 = []
-    hex1.append(hex[0])
-    hex1.append(hex[1])
-    hex2.append(hex[2])
-    hex2.append(hex[3])
-    hex3.append(hex[4])
-    hex3.append(hex[5])
-    R = []
-    G = []
-    B = []
-    for i in hex1:
-      i = int(hexdictionary[i])
-      R.append(i)
-    for i in hex2:
-      i = int(hexdictionary[i])
-      G.append(i)
-    for i in hex3:
-      i = int(hexdictionary[i])
-      B.append(i)
-    r = R[0] * 16 + R[1]
-    g = G[0] * 16 + G[1]
-    b = B[0] * 16 + B[1]
-    print(str(r) + ", " + str(g) + ", " + str(b))
-      
-  elif command == "rgb_hex convert":
-    #inputs
-    rgbdictionary = {
-      "0":"0",
-      "1":"1",
-      "2":"2",
-      "3":"3",
-      "4":"4",
-      "5":"5",
-      "6":"6",
-      "7":"7",
-      "8":"8",
-      "9":"9",
-      "10":"A",
-      "11":"B",
-      "12":"C",
-      "13":"D",
-      "14":"E",
-      "15":"F"
-    }
-    R = int(input("Insert R: "))
-    G = int(input("Insert G: "))
-    B = int(input("Insert B: "))
-    def rgbtohex(r,g,b,hexdict):
-      rtime = 0
-      gtime = 0
-      btime = 0
-      while r >= 16:
-        rtime += 1
-        r -= 16
-      while g >= 16:
-        gtime += 1
-        g -= 16
-      while b >= 16:
-        btime += 1
-        b -= 16
-      r = hexdict[str(r)]
-      rtime = hexdict[str(rtime)]
-      g = hexdict[str(g)]
-      gtime = hexdict[str(gtime)]
-      b = hexdict[str(b)]
-      btime = hexdict[str(btime)]
-      print(str(rtime) + str(r) + str(gtime) + str(g) + str(btime) + str(b))
-    rgbtohex(R,G,B,rgbdictionary)
-  elif command == "dho convert":
-    echo = int(input("Insert Number: "))
-    print("DECIMAL: " + str(echo))
-    octal = oct(echo)
-    octallist = []
-    octalresult = ""
-    for i in octal:
-      octallist.append(i)
-    octalpos = 0
-    for i in octallist:
-      if octalpos < 2:
-        octalpos += 1
-        pass
-      else:
-        octalpos += 1
-        octalresult += str(i)
-    print("OCTAL: " + octalresult)
-    hexa = hex(echo)
-    hexalist = []
-    hexaresult = ""
-    for i in hexa:
-      hexalist.append(i)
-    hexapos = 0
-    for i in hexalist:
-      if hexapos < 2:
-        hexapos += 1
-        pass
-      else:
-        hexapos += 1
-        hexaresult += str(i)
-    print("HEXADECIMAL: " + hexaresult)
   elif command == "calc":
     #B-Kernel Calculator
     import os
@@ -429,6 +434,12 @@ while booted == True:
       sub(int(input()), int(input()))
     elif command == "remainder" or command == "Remainder" or command == "REMAINDER":
       sub(int(input()), int(input()))
+    elif command == "cHEXRGB":
+      hex_rgb()
+    elif command == "cRGBHEX":
+      rgb_hex()
+    elif command == "cDHO":
+      dho()
     else:
       print("Command / Operation Not Found.")
   elif command == "tip":
