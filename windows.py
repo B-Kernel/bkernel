@@ -83,7 +83,7 @@ import random
 def Bootloader():
   if booted == False:
     os.system('color e0')
-    print("B-Kernel 3")
+    print("B-Kernel 3.0.0 Windows")
     print("(c) 2023")
     time.sleep(random.randint(2, 5))
     clear_screen()

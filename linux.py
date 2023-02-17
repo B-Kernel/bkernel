@@ -95,7 +95,7 @@ import time
 #Bootloader
 def Bootloader():
   if booted == False:
-    print("B-Kernel 3")
+    print("B-Kernel 3.0.0 Linux")
     print("(c) 2023")
     time.sleep(random.randint(2, 5))
     clear_screen()
